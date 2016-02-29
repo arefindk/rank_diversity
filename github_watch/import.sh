@@ -1,4 +1,4 @@
-FILES=/Users/arefindk/datasets/gitnet/*
+FILES=/Users/arefindk/datasets/github_watch/*
 for f in $FILES
 do
   echo "Importing file $f..."
