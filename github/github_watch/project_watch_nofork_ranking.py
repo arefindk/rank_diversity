@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+import json
 import pprint as pp
 import datetime as dt
 import matplotlib.pyplot as plt
@@ -70,15 +71,15 @@ print rank_change_distribution
 with open('project_watch_nofork_rank_distribution.json', 'w') as fp:
     json.dump(rank_change_distribution, fp)
 
-## Reloading the distribution form the storage
-with open('project_watch_nofork_rank_distribution.json', 'r') as fp:
-    rank_change_distribution = json.load(fp)
+# ## Reloading the distribution form the storage
+# with open('project_watch_nofork_rank_distribution.json', 'r') as fp:
+#     rank_change_distribution = json.load(fp)
 
 plt.plot(rank_change_distribution.keys(), rank_change_distribution.values(), 'r--')
 plt.xscale('log')
 plt.xlabel('Ranks')
 plt.ylabel('Probability of  Rank Change')
-fig.suptitle('Rank diversity of github projects (only which are not a fork of other project) based on their watch count')
+plt.suptitle('Rank diversity of github projects based on their watch count')
 plt.savefig("project_watch_nofork.pdf")
 plt.show()
 
