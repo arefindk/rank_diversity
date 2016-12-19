@@ -90,3 +90,12 @@ repository_watchers:{$type:"string"}}).forEach(function(doc)
 })
 ```
 
+```
+db.gt_watch_no_fork.find({  
+"created_at":{$type:"string"}}).forEach(function(doc)  
+{ 
+    doc.created_at = new Date(doc.created_at.replace(/-/g, '/'));
+    db.gt_watch_no_fork.save(doc);  
+})
+```
+

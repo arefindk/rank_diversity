@@ -70,7 +70,7 @@ print rank_change_distribution
 # # rankChangeDistribution = rankChangeDistribution / float(len(rankList)) # I am dividing the number changes for each rank by the total number of time periods here.
 
 plt.plot(rank_change_distribution.keys(), rank_change_distribution.values(), 'r--')
-#plt.xscale('log')
+plt.xscale('log')
 plt.savefig("enron_rank.pdf")
 plt.show()
 
