@@ -7,7 +7,7 @@ The significant informations are found in the 'payload' field where the table is
 
 ## Running the query in bigquery and append all the necessary information to a single table
 
-Here is one of all the queries:
+Last time I used the following queries, but next time the String format for date and count should be changed into ISODate and Integer. Here is one of all the queries:
 
 ```
 SELECT
@@ -66,5 +66,27 @@ do
   mongoimport --db github_watch --collection gt_watch_no_fork --file $f
   echo "Done $f"
 done
+```
+
+## Converting the string to date and integers in mongodb:
+
+Convert the `created_at` string to a date field and `repository_watchers` string to an integer field
+
+```
+db.gt_watch_no_fork.find().forEach(function(doc) { 
+doc.created_at = new Date(doc.created_at.replace(/-/g, '/'));
+doc.repository_watchers = parseInt(doc.repository_watchers);   
+db.gt_watch_no_fork.save(doc);  
+})
+```
+
+In case the conversion crashes, convert them seperately:
+```
+db.gt_watch_no_fork.find({  
+repository_watchers:{$type:"string"}}).forEach(function(doc)  
+{ 
+    doc.repository_watchers = parseInt(doc.repository_watchers);
+    db.gt_watch_no_fork.save(doc);  
+})
 ```
 
